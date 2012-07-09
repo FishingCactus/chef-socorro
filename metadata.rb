@@ -13,7 +13,7 @@ recipe "socorro::monitor", "Installs socorro monitor"
 recipe "socorro::processor", "Installs socorro processor"
 recipe "socorro::ui", "Installs socorro Web UI"
 
-%w{ apt build-essential java git rsyslog subversion python ant cron memcached php apache2" }.each do |cb|
+%w{ ant apache2 apt build-essential cron git java memcached php postgresql python rsyslog subversion" }.each do |cb|
   depends cb
 end
 
