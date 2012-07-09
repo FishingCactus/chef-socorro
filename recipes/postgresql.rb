@@ -1,22 +1,22 @@
 include_recipe "chef-socorro::base"
 
-# execute "Add PostgreSQL repository" do
-#   command "/usr/bin/sudo /usr/bin/add-apt-repository ppa:pitti/postgresql"
-#   creates "/etc/apt/sources.list.d/pitti-postgresql-lucid.list"
-#   user "root"
-#   action :run
-# end
+execute "Add PostgreSQL repository" do
+  command "/usr/bin/sudo /usr/bin/add-apt-repository ppa:pitti/postgresql"
+  creates "/etc/apt/sources.list.d/pitti-postgresql-lucid.list"
+  user "root"
+  action :run
+end
 
-# execute "Update PostgreSQL repository" do
-#   command "/usr/bin/apt-get update && touch /tmp/update-postgres-ppa"
-#   creates "/tmp/update-postgres-ppa"
-#   user "root"
-#   action :run
-# end
+execute "Update PostgreSQL repository" do
+  command "/usr/bin/apt-get update && touch /tmp/update-postgres-ppa"
+  creates "/tmp/update-postgres-ppa"
+  user "root"
+  action :run
+end
 
-# package "postgresql-9.0" do
-#   action :install
-# end
+package "postgresql-9.0" do
+  action :install
+end
 
 require_recipe "postgresql::server"
 
