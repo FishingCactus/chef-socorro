@@ -1,4 +1,4 @@
-include_recipe "socorro::web"
+include_recipe "chef-socorro::web"
 
 [ "memcached", "php", "php::module_pgsql", "php::module_curl", "php::module_memcache", "php::module_mysql", "php::module_ldap" ].each do |p|
   require_recipe p

@@ -1,4 +1,4 @@
-include_recipe "socorro::base"
+include_recipe "chef-socorro::base"
 
 require_recipe "cron"
 

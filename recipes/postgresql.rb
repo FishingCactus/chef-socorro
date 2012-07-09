@@ -1,4 +1,4 @@
-include_recipe "socorro::base"
+include_recipe "chef-socorro::base"
 
 # execute "Add PostgreSQL repository" do
 #   command "/usr/bin/sudo /usr/bin/add-apt-repository ppa:pitti/postgresql"

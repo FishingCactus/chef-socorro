@@ -1,4 +1,4 @@
-include_recipe "socorro::web"
+include_recipe "chef-socorro::web"
 
 directory "/home/socorro/primaryCrashStore" do
   owner "www-data"

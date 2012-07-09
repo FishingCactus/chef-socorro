@@ -1,4 +1,4 @@
-include_recipe "socorro::base"
+include_recipe "chef-socorro::base"
 
 require_recipe "apache2"
 require_recipe "apache2::mod_php5"

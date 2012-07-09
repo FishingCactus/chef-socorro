@@ -1,4 +1,4 @@
-include_recipe "socorro::base"
+include_recipe "chef-socorro::base"
 
 execute "Install Java" do
   command "/usr/bin/wget https://raw.github.com/flexiondotorg/oab-java6/master/oab-java.sh && bash oab-java.sh"

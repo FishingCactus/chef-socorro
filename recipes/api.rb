@@ -1,4 +1,4 @@
-include_recipe "socorro::web"
+include_recipe "chef-socorro::web"
 
 cookbook_file "/etc/apache2/sites-available/socorro-api" do
   source "apache_hosts/socorro-api" 

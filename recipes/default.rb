@@ -1,1 +1,1 @@
-include_recipe "socorro::complete"
+include_recipe "chef-socorro::complete"
