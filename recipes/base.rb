@@ -130,17 +130,6 @@ ruby_block "set-env-java-home" do
   end
 end
 
-# script "set-env-java-home in /etc/profile.d/" do
-#   interpreter "bash"
-#   user "root"
-#   code <<-EOH
-
-#   echo "export JAVA_HOME=#{node[:java][:java_home]}" > /etc/profile.d/java.sh
-#   . /etc/profile
-
-#   EOH
-# end
-
 link "/usr/lib/jvm/default-java" do
   to "/usr/lib/jvm/java-6-openjdk-i386"
   link_type :symbolic 
@@ -157,7 +146,7 @@ end
 execute "make install" do
   cwd "/home/socorro/source"
   command "/usr/bin/make install"
-  creates "/home/socorro/source/analysis/build/lib/socorro-analysis-job.jar"
+  creates "/data/socorro/htdocs/.htaccess"
   environment "JAVA_HOME" => node[:java][:java_home]
   user "root"
   action :run
