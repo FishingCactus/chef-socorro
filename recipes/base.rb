@@ -125,10 +125,21 @@ template "/home/socorro/source/scripts/config/commonconfig.py" do
   mode "644"
 end
 
-ruby_block  "set-env-java-home" do
+ruby_block "set-env-java-home" do
   block do
     ENV["JAVA_HOME"] =  node[:java][:java_home]
   end
+end
+
+script "set-env-java-home in /etc/profile.d/" do
+  interpreter "bash"
+  user "root"
+  code <<-EOH
+  
+  echo "export JAVA_HOME=#{node[:java][:java_home]}" >> /etc/profile.d/java.sh
+  . /etc/profile
+
+  EOH
 end
 
 execute "make minidump_stackwalk" do
