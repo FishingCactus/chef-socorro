@@ -131,15 +131,20 @@ ruby_block "set-env-java-home" do
   end
 end
 
-script "set-env-java-home in /etc/profile.d/" do
-  interpreter "bash"
-  user "root"
-  code <<-EOH
-  
-  echo "export JAVA_HOME=#{node[:java][:java_home]}" > /etc/profile.d/java.sh
-  . /etc/profile
+# script "set-env-java-home in /etc/profile.d/" do
+#   interpreter "bash"
+#   user "root"
+#   code <<-EOH
 
-  EOH
+#   echo "export JAVA_HOME=#{node[:java][:java_home]}" > /etc/profile.d/java.sh
+#   . /etc/profile
+
+#   EOH
+# end
+
+link "/usr/lib/jvm/default-java"
+  to node[:java][:java_home]
+  link_type :symbolic 
 end
 
 execute "make minidump_stackwalk" do
