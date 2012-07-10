@@ -22,7 +22,6 @@ package "curl" do
 end
 
 require_recipe "java"
-
 require_recipe "git"
 require_recipe "rsyslog"
 
