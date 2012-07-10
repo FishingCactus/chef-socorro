@@ -1,17 +1,5 @@
 include_recipe "chef-socorro::base"
 
-execute "Install Java" do
-  command "/usr/bin/wget https://raw.github.com/flexiondotorg/oab-java6/master/oab-java.sh && bash oab-java.sh"
-  creates '/etc/apt/sources.list.d/oab.list'
-  user "root"
-  cwd "/home/socorro"
-  action :run
-end
-
-package "sun-java6-jdk" do
-  action :install
-end
-
 cookbook_file "/etc/apt/sources.list.d/cloudera.list" do
   source "apt/cloudera.list" 
   owner "root"

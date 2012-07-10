@@ -21,13 +21,32 @@ package "curl" do
   action :install
 end
 
-require_recipe "java"
-
-ruby_block  "set-env-java-home" do
-  block do
-    ENV["JAVA_HOME"] =  "/usr/lib/jvm/java-1.6.0-openjdk"
-  end
+execute "Install Java" do
+  command "/usr/bin/wget https://raw.github.com/flexiondotorg/oab-java6/master/oab-java.sh && bash oab-java.sh"
+  creates '/etc/apt/sources.list.d/oab.list'
+  user "root"
+  cwd "/tmp"
+  action :run
 end
+
+package "sun-java6-jdk" do
+  action :install
+end
+
+# require_recipe "java"
+
+# ruby_block  "set-env-java-home" do
+#   block do
+#     ENV["JAVA_HOME"] =  "/usr/lib/jvm/java-1.6.0-openjdk"
+#   end
+# end
+
+# file "/etc/profile.d/jdk.sh" do
+#   content <<-EOS
+#     export JAVA_HOME="/usr/lib/jvm/java-1.6.0-openjdk"
+#   EOS
+#   mode 0755
+# end
 
 require_recipe "git"
 require_recipe "rsyslog"
