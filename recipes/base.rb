@@ -142,7 +142,7 @@ end
 #   EOH
 # end
 
-link "/usr/lib/jvm/default-java"
+link "/usr/lib/jvm/default-java" do
   to node[:java][:java_home]
   link_type :symbolic 
 end
