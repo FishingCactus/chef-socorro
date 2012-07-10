@@ -136,7 +136,7 @@ script "set-env-java-home in /etc/profile.d/" do
   user "root"
   code <<-EOH
   
-  echo "export JAVA_HOME=#{node[:java][:java_home]}" >> /etc/profile.d/java.sh
+  echo "export JAVA_HOME=#{node[:java][:java_home]}" > /etc/profile.d/java.sh
   . /etc/profile
 
   EOH
@@ -154,6 +154,7 @@ execute "make install" do
   cwd "/home/socorro/source"
   command "/usr/bin/make install"
   creates "/home/socorro/source/analysis/build/lib/socorro-analysis-job.jar"
+  environment "JAVA_HOME" => node[:java][:java_home]
   user "root"
   action :run
 end
