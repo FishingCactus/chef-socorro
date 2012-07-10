@@ -28,7 +28,7 @@ package "postgresql-contrib" do
   action :install
 end
 
-cookbook_file "/etc/postgresql/9.0/main/postgresql.conf" do
+cookbook_file "#{node[:postgresql][:dir]}/postgresql.conf" do
   source "postgresql/postgresql.conf" 
   owner "postgres"
   group "postgres"
