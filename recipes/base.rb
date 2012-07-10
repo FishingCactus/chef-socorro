@@ -142,7 +142,7 @@ end
 # end
 
 link "/usr/lib/jvm/default-java" do
-  to node[:java][:java_home]
+  to "/usr/lib/jvm/java-6-openjdk-i386"
   link_type :symbolic 
 end
 
