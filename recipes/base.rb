@@ -126,12 +126,12 @@ end
 
 ruby_block "set-env-java-home" do
   block do
-    ENV["JAVA_HOME"] =  node[:java][:java_home]
+    ENV["JAVA_HOME"] =  node[:java][:jdk_home]
   end
 end
 
 link "/usr/lib/jvm/default-java" do
-  to node[:java][:java_home]
+  to node[:java][:jdk_home]
   link_type :symbolic 
 end
 
@@ -147,7 +147,7 @@ execute "make install" do
   cwd "/home/socorro/source"
   command "/usr/bin/make install"
   creates "/data/socorro/htdocs/.htaccess"
-  environment "JAVA_HOME" => node[:java][:java_home]
+  environment "JAVA_HOME" => node[:java][:jdk_home]
   user "root"
   action :run
 end
