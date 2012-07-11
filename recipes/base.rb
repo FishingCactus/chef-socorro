@@ -124,15 +124,15 @@ template "/home/socorro/source/scripts/config/commonconfig.py" do
   mode "644"
 end
 
-ruby_block "set-env-java-home" do
-  block do
-    ENV["JAVA_HOME"] =  node[:java][:jdk_home]
-  end
+link "/usr/lib/jvm/default-java" do
+  to "/usr/lib/jvm/java-6-openjdk"
+  link_type :symbolic 
 end
 
-link "/usr/lib/jvm/default-java" do
-  to node[:java][:jdk_home]
-  link_type :symbolic 
+ruby_block "set-env-java-home" do
+  block do
+    ENV["JAVA_HOME"] = "/usr/lib/jvm/default-java"
+  end
 end
 
 execute "make minidump_stackwalk" do
@@ -147,7 +147,7 @@ execute "make install" do
   cwd "/home/socorro/source"
   command "/usr/bin/make install"
   creates "/data/socorro/htdocs/.htaccess"
-  environment "JAVA_HOME" => node[:java][:jdk_home]
+  environment "JAVA_HOME" => "/usr/lib/jvm/default-java"
   user "root"
   action :run
 end
