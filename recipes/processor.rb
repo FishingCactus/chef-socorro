@@ -26,7 +26,7 @@ template "/home/socorro/source/scripts/config/processorconfig.py" do
   mode "644"
 end
 
-Chef::Log.info( "Mount Symbols? : " + node[:socorro][:processor][:mount_symbols] )
+Chef::Log.info( "Mount Symbols? : " + node[:socorro][:processor][:mount_symbols] ? " YES" : "NO" )
 Chef::Log.info( "Mount Folder : " + node["socorro"]["processor"]["mount_folder"] )
 
 if node['socorro']['processor']['mount_symbols']
