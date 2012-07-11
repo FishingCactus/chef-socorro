@@ -35,19 +35,18 @@ cookbook_file "/etc/postgresql/9.0/main/postgresql.conf" do
   notifies :restart, "service[postgresql]"
 end
 
-
-execute "Setup PostgreSQL database" do
-  command "/home/socorro/source/socorro/external/postgresql/setupdb_app.py --database_name=breakpad"
-  not_if "/usr/bin/psql --list | grep breakpad"
-  cwd '/home/socorro/source'
-  environment ({'PYTHONPATH' => '/data/socorro/application:/data/socorro/thirdparty'})
+execute "Create PostgreSQL user" do
+  command "/usr/bin/createuser -d -r -s socorro"
+  only_if "/usr/bin/psql -xt breakpad -c \"SELECT * FROM pg_user WHERE usename = 'socorro'\" | grep \"(No rows)\""
   user "postgres"
   action :run
 end
 
-execute "Create PostgreSQL user" do
-  command "/usr/bin/createuser -d -r -s socorro"
-  only_if "/usr/bin/psql -xt breakpad -c \"SELECT * FROM pg_user WHERE usename = 'socorro'\" | grep \"(No rows)\""
+execute "Setup PostgreSQL database" do
+  command "/home/socorro/source/socorro/external/postgresql/setupdb_app.py --database_name=breakpad"
+  not_if "/usr/bin/psql --list breakpad"
+  cwd '/home/socorro/source'
+  environment ({'PYTHONPATH' => '/data/socorro/application:/data/socorro/thirdparty'})
   user "postgres"
   action :run
 end
