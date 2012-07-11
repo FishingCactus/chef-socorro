@@ -131,7 +131,7 @@ ruby_block "set-env-java-home" do
 end
 
 link "/usr/lib/jvm/default-java" do
-  to "/usr/lib/jvm/java-6-openjdk-i386"
+  to node[:java][:java_home]
   link_type :symbolic 
 end
 
