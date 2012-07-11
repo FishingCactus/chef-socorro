@@ -38,7 +38,7 @@ end
 
 execute "Setup PostgreSQL database" do
   command "/home/socorro/source/socorro/external/postgresql/setupdb_app.py --database_name=breakpad"
-  not_if "/usr/bin/psql --list breakpad"
+  not_if "/usr/bin/psql --list | grep breakpad"
   cwd '/home/socorro/source'
   environment ({'PYTHONPATH' => '/data/socorro/application:/data/socorro/thirdparty'})
   user "postgres"
