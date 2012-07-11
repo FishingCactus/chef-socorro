@@ -1,24 +1,5 @@
 include_recipe "chef-socorro::base"
 
-# require_recipe "postgresql::server"
-
-# package "postgresql-plperl" do
-#   action :install
-# end
-
-# package "postgresql-contrib" do
-#   action :install
-# end
-
-# cookbook_file "#{node[:postgresql][:dir]}/postgresql.conf" do
-#   source "postgresql/postgresql.conf" 
-#   owner "postgres"
-#   group "postgres"
-#   mode "0644"
-
-#   notifies :restart, "service[postgresql]"
-# end
-
 execute "Add PostgreSQL repository" do
   command "/usr/bin/sudo /usr/bin/add-apt-repository ppa:pitti/postgresql"
   creates "/etc/apt/sources.list.d/pitti-postgresql-lucid.list"
@@ -37,8 +18,6 @@ package "postgresql-9.0" do
   action :install
 end
 
-require_recipe "postgresql::server"
-
 package "postgresql-plperl-9.0" do
   action :install
 end
@@ -46,6 +25,16 @@ end
 package "postgresql-contrib-9.0" do
   action :install
 end
+
+cookbook_file "/etc/postgresql/9.0/main/postgresql.conf" do
+  source "postgresql/postgresql.conf" 
+  owner "postgres"
+  group "postgres"
+  mode "0644"
+
+  notifies :restart, "service[postgresql]"
+end
+
 
 execute "Setup PostgreSQL database" do
   command "/home/socorro/source/socorro/external/postgresql/setupdb_app.py --database_name=breakpad"
