@@ -4,14 +4,14 @@ directory "/home/socorro/primaryCrashStore" do
   owner "www-data"
   group "socorro"
   action :create
-  mode "2755"
+  mode "777"
 end
 
 directory "/home/socorro/fallback" do
   owner "www-data"
   group "socorro"
   action :create
-  mode "2755"
+  mode "777"
 end
 
 cookbook_file "/etc/apache2/sites-available/crash-reports" do
